@@ -91,7 +91,14 @@ extension Rgb: Zero {
     public static let zero = Rgb(vec4.zero)
 
     public static func + (lhs: Rgb, rhs: Rgb) -> Rgb {
-        return Rgb(clamp(lhs.vector + rhs.vector, 0, 1))
+        return Rgb(lhs.vector + rhs.vector)
+    }
+}
+
+extension Rgb: Interpolatable {
+
+    public func interpolate(between y: Rgb, t: Float) -> Rgb {
+        return Rgb(mix(self.vector, y.vector, t))
     }
 }
 
@@ -104,6 +111,10 @@ extension Rgb: CustomStringConvertible {
 
 extension Rgb {
 
+    public static func * (lhs: Rgb, rhs: Float) -> Rgb {
+        return Rgb(lhs.vector * rhs)
+    }
+
     /// The luminance of a RGB color.
     public var luminance: Float {
         let v = self.vector
@@ -112,7 +123,6 @@ extension Rgb {
 
     /// Constructs a gray color.
     public static func gray(degree: Float) -> Rgb {
-        let rgb = vec3(clamp(degree, 0, 1))
-        return Rgb(vec4(rgb, 1))
+        return Rgb(vec4(vec3(degree), 1))
     }
 }
