@@ -20,4 +20,11 @@ class RgbTests: XCTestCase {
         red.red = 100
         XCTAssertEqual(red.red, 1)
     }
+
+    func testInterpolatable() {
+        let red = Rgb.red
+        let green = Rgb.green
+        let yellow = red.interpolate(between: green, t: 0.5)
+        XCTAssertEqual(yellow, Rgb(red: 0.5, green: 0.5, blue: 0))
+    }
 }
