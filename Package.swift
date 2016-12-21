@@ -9,7 +9,7 @@ import PackageDescription
 let package = Package(
     name: "FlatColor",
     dependencies: [
-        .Package(url: "https://github.com/dche/GLMath.git",
+        .Package(url: "../GLMath",
                  majorVersion: 0),
     ]
 )
