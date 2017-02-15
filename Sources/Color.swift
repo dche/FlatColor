@@ -6,7 +6,6 @@
 // Copyright (c) 2016 The FlatColor authors.
 // Licensed under MIT License.
 
-import simd
 import FlatUtil
 import GLMath
 
