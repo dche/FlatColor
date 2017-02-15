@@ -6,7 +6,13 @@
 // Copyright (c) 2016 The FlatColor authors.
 // Licensed under MIT License.
 
-import simd
+// For `floor(:Float)`.
+#if os(Linux)
+    import Glibc
+#else
+    import simd
+#endif
+
 import FlatUtil
 import GLMath
 
@@ -117,7 +123,7 @@ extension Rgb {
 
         if mx ~== mn { return 0 }
         else {
-            let c = recip(mx - mn)
+            let c = (mx - mn).recip
 
             let deg: Float
             switch mx {

@@ -4,7 +4,6 @@
 // Copyright (c) 2016 The FlatColor authors.
 // Licensed under MIT License.
 
-import simd
 import FlatUtil
 import GLMath
 
@@ -40,7 +39,6 @@ public struct Srgb {
     init(_ rgba: vec4) {
         self._rgba = rgba
     }
-
 }
 
 extension Srgb: Color {
@@ -50,7 +48,8 @@ extension Srgb: Color {
             guard f > 0.0031308 else { return f * 12.92 }
 
             let a: Float = 0.055
-            return (a + 1) * pow(f, recip(2.4)) - a
+            let e: Float = 2.4
+            return (a + 1) * pow(f, e.recip) - a
         }
         self.init(vec4(v3, rgb.alpha))
     }
@@ -60,7 +59,8 @@ extension Srgb: Color {
             guard f > 0.04045 else { return f / 12.92 }
 
             let a: Float = 0.055
-            return pow((f + a) * recip(1 + a), 2.4)
+            let e: Float = 2.4
+            return pow((f + a) * (1 + a).recip, e)
         }
         return Rgb(vec4(v3, self.alpha))
     }
