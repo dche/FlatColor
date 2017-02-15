@@ -4,6 +4,11 @@
 // Copyright (c) 2016 The FlatColor authors.
 // Licensed under MIT License.
 
+// For matrix-vector multiplication.
+#if !os(Linux)
+    import simd
+#endif
+
 import FlatUtil
 import GLMath
 
