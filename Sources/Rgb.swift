@@ -6,7 +6,6 @@
 // Copyright (c) 2016 The FlatColor authors.
 // Licensed under MIT License.
 
-import simd
 import FlatUtil
 import GLMath
 
@@ -124,5 +123,36 @@ extension Rgb {
     /// Constructs a gray color.
     public static func gray(degree: Float) -> Rgb {
         return Rgb(vec4(vec3(degree), 1))
+    }
+}
+
+extension Rgb {
+
+    /// Derives a `Rgb` color from the receiver with given _red_ value.
+    public func red(_ r: Float) -> Rgb {
+        var clr = self
+        clr.red = r
+        return clr
+    }
+
+    /// Derives a `Rgb` color from the receiver with given _green_ value.
+    public func green(_ g: Float) -> Rgb {
+        var clr = self
+        clr.green = g
+        return clr
+    }
+
+    /// Derives a `Rgb` color from the receiver with given _blue_ value.
+    public func blue(_ b: Float) -> Rgb {
+        var clr = self
+        clr.blue = b
+        return clr
+    }
+
+    /// Derives a `Rgb` color from the receiver with given _alpha_ value.
+    public func alpha(_ a: Float) -> Rgb {
+        var clr = self
+        clr.alpha = a
+        return clr
     }
 }
