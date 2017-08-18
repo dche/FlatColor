@@ -4,10 +4,7 @@ language: swift
 matrix:
     include:
         - os: osx
-          osx_image: xcode8
-        # - os: linux
-        #   dist: trusty
-        #   sudo: required
+          osx_image: xcode8.3
 
 script:
     - swift package update
