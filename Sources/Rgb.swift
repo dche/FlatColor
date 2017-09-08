@@ -63,8 +63,74 @@ public struct Rgb {
 
         self._rgba = rgba
     }
+}
 
-    // TODO: Rgb("#e9c"), Rgb("#e292c2")
+extension Rgb {
+
+    /// Constructs a RGB color with given `UInt32` number, which contains the
+    /// values of 4 color channels in the order `RGBA`.
+    public init (_ components: UInt32) {
+        var c = components.littleEndian
+        // SWIFT BUG: Using `UnsafePointer` results to "ambiguous use of `init`"
+        //            error.
+        self = UnsafeMutablePointer(&c).withMemoryRebound(to: UInt8.self, capacity: 4) { ptr in
+            return Rgb(ptr[3], ptr[2], ptr[1], ptr[0])
+        }
+    }
+
+    /// Constructs a RGB color with given CSS style color string.
+    ///
+    /// The string must be in the format `"#FFF"` or `#FFFFFF`.
+    ///
+    /// If the format is invalid, the result color is _black_.
+    public init (_ css: String) {
+
+        func hex(char: CChar) -> Int {
+            // [0 - 9]
+            if char > 47 && char < 58 { return Int(char) - 48 }
+            // [A - F]
+            if char > 64 && char < 71 { return Int(char) - 65 + 10 }
+            // [a - f]
+            if char > 96 && char < 103 { return Int(char) - 97 + 10 }
+            // Invalid.
+            return -1
+        }
+
+        let cstr = css.utf8CString
+        var rgb = [0, 0, 0]
+        // NOTE:
+        // - `cstr` contains the trailing `\0` which we do not touch.
+        // - ASCII('#') == 35
+        if (cstr.count == 5 || cstr.count == 8) && cstr[0] == 35 {
+            for i in 0..<3 {
+                if cstr.count == 5 {
+                    let n = hex(char: cstr[i + 1])
+                    guard n >= 0 else {
+                        rgb[0] = n
+                        break
+                    }
+                    rgb[i] = n * 16 + n
+                } else {
+                    let m = hex(char: cstr[i * 2 + 1])
+                    guard m >= 0 else {
+                        rgb[0] = m
+                        break
+                    }
+                    let n = hex(char: cstr[i * 2 + 2])
+                    guard n >= 0 else {
+                        rgb[0] = n
+                        break
+                    }
+                    rgb[i] = m * 16 + n
+                }
+            }
+        }
+        if rgb[0] >= 0 {
+            self = Rgb(UInt8(rgb[0]), UInt8(rgb[1]), UInt8(rgb[2]))
+        } else {
+            self = Rgb.black
+        }
+    }
 }
 
 extension Rgb: Color {
