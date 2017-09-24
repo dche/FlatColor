@@ -1,7 +1,7 @@
 //
 // FlatColor - Srgb
 //
-// Copyright (c) 2016 The FlatColor authors.
+// Copyright (c) 2017 The FlatColor authors.
 // Licensed under MIT License.
 
 import FlatUtil
@@ -42,6 +42,8 @@ public struct Srgb {
 }
 
 extension Srgb: Color {
+
+    public typealias InexactNumber = Float
 
     public init (rgb: Rgb) {
         let v3 = rgb.vector.rgb.map { f in

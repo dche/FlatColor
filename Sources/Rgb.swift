@@ -3,7 +3,7 @@
 //
 // RGB color model.
 //
-// Copyright (c) 2016 The FlatColor authors.
+// Copyright (c) 2017 The FlatColor authors.
 // Licensed under MIT License.
 
 import FlatUtil
@@ -135,6 +135,8 @@ extension Rgb {
 
 extension Rgb: Color {
 
+    public typealias InexactNumber = Float
+
     public init (rgb: Rgb) {
         self = rgb
     }
@@ -162,7 +164,9 @@ extension Rgb: Zero {
 
 extension Rgb: Interpolatable {
 
-    public func interpolate(between y: Rgb, t: Float) -> Rgb {
+    public typealias InterpolatableNumber = Float
+
+    public func interpolate(_ y: Rgb, t: Float) -> Rgb {
         return Rgb(mix(self.vector, y.vector, t))
     }
 }

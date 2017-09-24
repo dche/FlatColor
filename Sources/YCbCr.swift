@@ -1,7 +1,7 @@
 //
 // FlatColor - Color.swift
 //
-// Copyright (c) 2016 The FlatColor authors.
+// Copyright (c) 2017 The FlatColor authors.
 // Licensed under MIT License.
 
 // For matrix-vector multiplication.
@@ -47,6 +47,8 @@ public struct YCbCr {
 }
 
 extension YCbCr: Color {
+
+    public typealias InexactNumber = Float
 
     public init (rgb: Rgb) {
         // ITU.BT-709
