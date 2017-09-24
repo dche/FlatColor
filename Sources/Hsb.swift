@@ -3,7 +3,7 @@
 //
 // HSB color model.
 //
-// Copyright (c) 2016 The FlatColor authors.
+// Copyright (c) 2017 The FlatColor authors.
 // Licensed under MIT License.
 
 // For `floor(:Float)`.
@@ -18,6 +18,8 @@ import GLMath
 
 /// Color value in HSB color model.
 public struct Hsb: Color {
+
+    public typealias InexactNumber = Float
 
     fileprivate var _hsba = vec4.zero
 

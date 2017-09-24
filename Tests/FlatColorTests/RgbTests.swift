@@ -50,7 +50,7 @@ class RgbTests: XCTestCase {
     func testInterpolatable() {
         let red = Rgb.red
         let green = Rgb.green
-        let yellow = red.interpolate(between: green, t: 0.5)
+        let yellow = red.interpolate(green, t: 0.5)
         XCTAssertEqual(yellow, Rgb(red: 0.5, green: 0.5, blue: 0))
     }
 }

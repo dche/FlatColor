@@ -3,15 +3,17 @@
 //
 // The Color protocol.
 //
-// Copyright (c) 2016 The FlatColor authors.
+// Copyright (c) 2017 The FlatColor authors.
 // Licensed under MIT License.
 
 import FlatUtil
 import GLMath
 
 /// Generic color type.
-public protocol Color: Equatable, Random, ApproxEquatable {
-
+public protocol Color: Equatable, Random, ApproxEquatable
+    where
+    InexactNumber == Float
+{
     /// Constructs a color from a RGB color.
     init (rgb: Rgb)
 
@@ -30,8 +32,6 @@ extension Color {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.vector == rhs.vector
     }
-
-    public typealias NumberType = Float
 
     public func isClose(to other: Self, tolerance: Float) -> Bool {
         return self.vector.isClose(to: other.vector, tolerance: tolerance)
