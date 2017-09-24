@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "../GLMath",
+            url: "https://github.com/dche/GLMath.git",
             .branch("master")
         )
     ],
